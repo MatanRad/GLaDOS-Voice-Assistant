@@ -52,6 +52,14 @@ class RivaTTS:
         text = text.replace("*", " asterisk ")
         text = text.replace("@", " at ")
         text = text.replace("’", "'")
+
+        text = re.sub(r'(\s|^)([Mm][Rr]\.)(\s|$)', lambda m: f"{m.group(1)}mister{m.group(3)}", text)
+        text = re.sub(r'(\s|^)([Mm][Ss]\.)(\s|$)', lambda m: f"{m.group(1)}miss{m.group(3)}", text)
+        text = re.sub(r'(\s|^)([Mm][Rr][Ss]\.)(\s|$)', lambda m: f"{m.group(1)}missus{m.group(3)}", text)
+
+        text = re.sub(r'(\s|^)(USA|usa)(\s|$|\?|!|,)', lambda m: f"{m.group(1)}U S AY{m.group(3)}", text)
+        text = re.sub(r'(\s|^)(UK|uk)(\s|$|\?|!|,)', lambda m: f"{m.group(1)}U KAY{m.group(3)}", text)
+
         return text
         
 
@@ -100,6 +108,7 @@ class RivaTTS:
             bytes: The raw audio data.
         """
         text = self._normalize_text(text)
+        print(text)
         texts = self._split_text(text)
 
         audio_segments = [self.s.synthesize(t, sample_rate_hz=self.rate).audio for t in texts]
