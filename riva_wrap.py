@@ -59,6 +59,8 @@ class RivaTTS:
 
         text = re.sub(r'(\s|^)(USA|usa)(\s|$|\?|!|,)', lambda m: f"{m.group(1)}U S AY{m.group(3)}", text)
         text = re.sub(r'(\s|^)(UK|uk)(\s|$|\?|!|,)', lambda m: f"{m.group(1)}U KAY{m.group(3)}", text)
+        
+        text = re.sub(r'(\s|^)(AI|ai)(\s|$|\?|!|,)', lambda m: f"{m.group(1)}AY IY{m.group(3)}", text)
 
         return text
         
@@ -108,7 +110,6 @@ class RivaTTS:
             bytes: The raw audio data.
         """
         text = self._normalize_text(text)
-        print(text)
         texts = self._split_text(text)
 
         audio_segments = [self.s.synthesize(t, sample_rate_hz=self.rate).audio for t in texts]
