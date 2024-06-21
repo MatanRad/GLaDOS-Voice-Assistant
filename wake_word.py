@@ -1,4 +1,3 @@
-from mic_wrapper import Microphone
 import numpy as np
 import pvporcupine as pv
 

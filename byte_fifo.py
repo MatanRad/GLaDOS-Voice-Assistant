@@ -12,6 +12,9 @@ class ByteFIFO(object):
 
     def peek(self, size):
         return self._buf[:size]
+    
+    def clear(self):
+        self._buf = bytearray()
 
     def __len__(self):
         return len(self._buf)
