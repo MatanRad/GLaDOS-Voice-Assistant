@@ -52,6 +52,9 @@ class RivaTTS:
         text = text.replace("*", " asterisk ")
         text = text.replace("@", " at ")
         text = text.replace("’", "'")
+        
+        text = text.replace(" °", "degrees")
+        text = text.replace("°", " degrees")
 
         text = re.sub(r'(\s|^)([Mm][Rr]\.)(\s|$)', lambda m: f"{m.group(1)}mister{m.group(3)}", text)
         text = re.sub(r'(\s|^)([Mm][Ss]\.)(\s|$)', lambda m: f"{m.group(1)}miss{m.group(3)}", text)
