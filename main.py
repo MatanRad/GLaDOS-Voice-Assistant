@@ -13,7 +13,7 @@ def main():
     chat = Chat(secrets["openai_key"])
     wake = WakeWordDetector(secrets["picovoice_key"], sample_rate=16000, keyword_paths=["glados_de_windows_v3_0_0.ppn"], model_path="porcupine_params_de.pv")
 
-    assistant = Assistant(chat, riva, wake)
+    assistant = Assistant(chat, riva, wake, mic_name="Anker Mic", speaker_name="Anker Speakers")
     assistant.run()
 
 if __name__ == "__main__":

@@ -53,6 +53,8 @@ class RivaTTS:
         text = text.replace("@", " at ")
         text = text.replace("’", "'")
         
+        text = text.replace("NTFS", "N T F S")
+        
         text = text.replace(" °", "degrees")
         text = text.replace("°", " degrees")
 

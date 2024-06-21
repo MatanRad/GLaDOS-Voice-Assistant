@@ -10,6 +10,10 @@ class Microphone(PyAudioDevice):
     def __init__(self, mic_name=None):
         super().__init__(name=mic_name)
 
+    def _get_devices(self) -> List[dict]:
+        devices = super()._get_devices()
+        return [d for d in devices if d["maxInputChannels"] > 0]
+
     @contextmanager
     def mic_stream(self, rate=16000, chunk_size=1024, format=pyaudio.paInt16) -> Generator[pyaudio.Stream, None, None]:
         stream = self._pyaudio.open(format=format, channels=1, rate=rate, input=True, frames_per_buffer=chunk_size, input_device_index=self._dev_info["index"])

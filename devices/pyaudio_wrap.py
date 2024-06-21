@@ -13,8 +13,10 @@ class PyAudioDevice(object):
             return matching_candidates[0]
 
         contained_candidates = [m for m in devices if name in m["name"]]
+        names = [m["name"] for m in contained_candidates]
         if len(contained_candidates) > 1:
-            raise ValueError(f"Multiple devices contain the name '{name}'.")
+            print(f"[AUDIO] Multiple devices contain the name '{name}' ({names}). Selecting the first")
+            return contained_candidates[0]
         
         if len(contained_candidates) == 1:
             return contained_candidates[0]
