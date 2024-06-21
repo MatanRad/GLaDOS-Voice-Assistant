@@ -33,10 +33,6 @@ class Assistant(object):
         return None
 
     def handle_stt(self, text: str):
-        if self.player.is_playing():
-            print("[Chat] Ditching current TTS")
-            self.player.clear()
-
         resp = self.chat.chat(text)
         print(f"[Chat] Response: {resp}")
         sound = self.tts.synthesize_raw(resp)
@@ -51,6 +47,10 @@ class Assistant(object):
 
                 if self.wake.detect(chunk):
                     print("[Wake Word] Detected")
+                    if self.player.is_playing():
+                        print("[Chat] Ditching current TTS")
+                        self.player.clear()
+                    self.speaker.play_wave("ping.wav")
                     if self.current_stt is not None:
                         print("[Wake Word] Ditching current STT")
                     self.current_stt = STTAction()
