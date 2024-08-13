@@ -17,7 +17,7 @@ class RivaTTS:
         NUM_CHANNELS (int): The number of audio channels (default: 1).
 
     Args:
-        api_url (str): The URL of the RivaTTS API (default: "172.24.42.218:50051").
+        api_url (str): The URL of the RivaTTS API.
         rate (int): The sample rate in Hz for the audio data (default: 22050).
     """
 
@@ -25,12 +25,12 @@ class RivaTTS:
     NUM_CHANNELS = 1
     MAX_CHARACTERS = 400
 
-    def __init__(self, api_url="172.24.42.218:50051", rate=22050):
+    def __init__(self, api_url, rate=22050):
         """
         Initializes a new instance of the RivaTTS class.
 
         Args:
-            api_url (str): The URL of the RivaTTS API (default: "172.24.42.218:50051").
+            api_url (str): The URL of the RivaTTS API.
             rate (int): The sample rate in Hz for the audio data (default: 22050).
         """
         self.s = SpeechSynthesisService(Auth(uri=api_url))
@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Text-to-Speech Wrapper")
     parser.add_argument("--stdin", dest="stdin", action="store_const", const=True, default=False, help="Read text from stdin (Otherwise is interactive)")
-    parser.add_argument("--api_url", dest="api_url", type=str, help="The URL of the RivaTTS API", default="172.24.42.218:50051")
+    parser.add_argument("--api_url", dest="api_url", type=str, help="The URL of the RivaTTS API", required=True)
     parser.add_argument("--rate", dest="rate", type=int, help="The sample rate in Hz for the audio data", default=22050)
     args = vars(parser.parse_args())
 
